@@ -3,7 +3,7 @@ org 0000H
   mov A, #0
   
   chk:mov B, @R0
-  cjne A,B,l1
+  cjne A,B, l1
   l1:jnc incr
   mov A,B
   
