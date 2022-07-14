@@ -1,0 +1,18 @@
+from tkinter import *
+def sayHi():
+    text.insert(END,'Whats up??'+enterName.get())
+stage= Tk()
+stage.title('Greetings...')
+welcomeText= Label(text="Welcome To My App",font=20)
+welcomeText.pack(side=TOP)
+pane= Frame(stage)
+pane.pack()
+l1= Label(pane,text='What is your name')
+l1.pack(side=LEFT)
+enterName= Entry(pane)
+enterName.pack(side=LEFT)
+button= Button(text='Click Me',command=sayHi)
+button.pack()
+text= Text()
+text.pack(side=BOTTOM)
+stage.mainloop()
