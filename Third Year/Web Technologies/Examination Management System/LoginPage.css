@@ -1,0 +1,30 @@
+body{
+  padding:170px 0;
+  background-image:url("interview room.jpg");
+  background-size:cover;
+}
+.credentials{
+  height:40px;
+  width:220px;
+  font-size:20px;
+}
+.usernamePwd{
+  margin:auto;
+  width:350px;
+  border:groove;
+  padding:40px 10px;
+  text-align:center;
+}
+
+.button{
+  background-color:blue;
+  padding:12px;
+  border-radius:10px;
+  color:orange;
+  font-size:20px;
+  
+}
+.button:hover{
+  background-color:orange;
+  color:blue;
+}
