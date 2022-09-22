@@ -4,7 +4,7 @@ body{
 	
 }
 #container{
-	width:70%;
+	width:60%;
 	border:3px solid blue;
 	margin:auto;
 }
@@ -21,12 +21,12 @@ body{
 }
 .options{
   border:3px ridge;
+  margin:8px;
   padding:6px;
-	cursor:pointer;
+  cursor:pointer;
 }
 #question{
-	width:80%;
-	text-align:left;
+	width:100%;
 }
 #ans{
 	margin-top:5px;
@@ -40,7 +40,7 @@ body{
 	display:flex;
 	align-items:center;
 	justify-content:center;
-	width:10%;
+	width:8%;
 	text-align:center;
 }
 .move:hover{
