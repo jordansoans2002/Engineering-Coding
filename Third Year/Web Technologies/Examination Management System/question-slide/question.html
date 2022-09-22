@@ -1,0 +1,42 @@
+<html>
+
+  <head>
+    <link rel="stylesheet" href="question.css">
+    <script src="question.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+
+  <body onload=loadQs(0)>
+    <div id='container'>
+      <div class=header>
+        Printout survey
+      </div>
+      <div id='qs-container'>
+        <div class=move id=prev onClick=loadQs(-1)>
+					&lt;
+        </div>
+        <div id=question>
+          <div id="qs">Question to be asked</div>
+          <div id="ans">
+            <p class='options' id='opt0' onclick='selectOption(0)'>
+              Option 1
+            </p>
+            <p class='options' id='opt1' onclick='selectOption(1)'>
+              Option 2
+            </p>
+            <p class='options' id='opt2' onclick='selectOption(2)'>
+              Option 3
+            </p>
+            <p class='options' id='opt3' onclick='selectOption(3)'>
+              Option 4
+            </p>
+          </div>
+        </div>
+        <div class=move id=next onclick=loadQs(1)>
+          &gt;
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
