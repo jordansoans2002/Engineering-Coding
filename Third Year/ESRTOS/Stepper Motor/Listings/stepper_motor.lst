@@ -1,0 +1,97 @@
+C51 COMPILER V9.60.0.0   STEPPER_MOTOR                                                     02/13/2023 15:59:57 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE STEPPER_MOTOR
+OBJECT MODULE PLACED IN .\Objects\stepper_motor.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE stepper_motor.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\List
+                    -ings\stepper_motor.lst) TABS(2) OBJECT(.\Objects\stepper_motor.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          
+   3          sbit sw = P3^1;
+   4          
+   5          void delay(unsigned int d){
+   6   1        int i,j;
+   7   1        for(i=0;i<d;i++)
+   8   1          for(j=0;j<1275;j++);
+   9   1      }
+  10          
+  11          int leftRotate(int n){
+  12   1        return (n << 1) | (n >> 7);
+  13   1      }
+  14           
+  15          int rightRotate(int n){
+  16   1        return (n >> 1) | (n << 7);
+  17   1      }
+  18              
+  19          void main(){
+  20   1        int i;
+  21   1        /*while(1){
+  22   1          if(sw==0){
+  23   1            leftRotate(P2);
+  24   1            delay(10);
+  25   1          }else{
+  26   1            rightRotate(P2);
+  27   1            delay(10);
+  28   1          }
+  29   1        }*/
+  30   1        
+  31   1        for(i=0;;i++){
+  32   2          if(sw==0){
+  33   3            P2 = 0x08; //1000
+  34   3            delay(10); 
+  35   3            P2 = 0x0C; //1100 
+  36   3            delay(10);
+  37   3            P2 = 0x04; //0100
+  38   3            delay(10);
+  39   3            P2 = 0x06; //0110
+  40   3            delay(10);
+  41   3            P2 = 0x02; //0010
+  42   3            delay(10);
+  43   3            P2 = 0x03; //0011
+  44   3            delay(10);
+  45   3            P2 = 0x01; //0001
+  46   3            delay(10);
+  47   3            P2 = 0x09; //1001
+  48   3            delay(10);
+  49   3          }
+  50   2          else{
+  51   3            P2 = 0x08; //1000
+  52   3            delay(10);
+  53   3            P2 = 0x09; //1001
+  54   3            delay(10);
+C51 COMPILER V9.60.0.0   STEPPER_MOTOR                                                     02/13/2023 15:59:57 PAGE 2   
+
+  55   3            P2 = 0x01; //0001
+  56   3            delay(10);
+  57   3            P2 = 0x03; //0011
+  58   3            delay(10);
+  59   3            P2 = 0x02; //0010
+  60   3            delay(10);
+  61   3            P2 = 0x06; //0110
+  62   3            delay(10);
+  63   3            P2 = 0x04; //0100
+  64   3            delay(10);
+  65   3            P2 = 0x0C; //1100 
+  66   3            delay(10);
+  67   3          }
+  68   2        }
+  69   1        
+  70   1        while(1);
+  71   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    199    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
