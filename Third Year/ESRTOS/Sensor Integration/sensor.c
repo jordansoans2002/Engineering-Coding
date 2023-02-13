@@ -7,6 +7,18 @@ sbit rd = P2^6;
 sbit intr = P2^7;
 
 unsigned int value;
+
+void convert(unsigned char val){
+	int i=0,j;
+	unsigned char s[10];
+	while(val>0){
+		s[i++]=(val%10)+48;
+		val=val/10;
+	}
+	cmd(0x01);
+	display(s,i);
+}
+		
 void main(){
 	init();
 	
@@ -26,7 +38,7 @@ void main(){
 		rd = 0; //rd low to read data
 		value = P1;
 		cmd(0x01);
-		write(value);
+		convert(value);
 		delay(10);
 		rd = 1;
 	}
