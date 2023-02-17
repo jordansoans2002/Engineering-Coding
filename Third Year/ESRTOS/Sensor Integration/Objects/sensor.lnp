@@ -1,4 +1,0 @@
-".\Objects\STARTUP.obj",
-".\Objects\sensor.obj" 
-TO ".\Objects\sensor" 
-PRINT(".\Listings\sensor.m51") RAMSIZE(256) 
