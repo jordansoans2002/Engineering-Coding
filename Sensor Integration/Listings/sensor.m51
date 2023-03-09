@@ -1,0 +1,278 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    02/22/2023  13:19:58  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\sensor.obj TO .\Objects\sensor PRINT (.\Listings\sensor.m51
+>> ) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\STARTUP.obj (?C_STARTUP)
+  .\Objects\sensor.obj (SENSOR)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDOPTR)
+
+
+LINK MAP OF MODULE:  .\Objects\sensor (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0007H     UNIT         ?DT?_REV_DISPLAY?SENSOR
+            DATA    000FH     0006H     UNIT         ?DT?_DISPLAY?SENSOR
+            DATA    0015H     0005H     UNIT         _DATA_GROUP_
+            IDATA   001AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0044H     UNIT         ?PR?_REV_DISPLAY?SENSOR
+            CODE    0844H     0039H     UNIT         ?PR?_CONVERT_DISPLAY?SENSOR
+            CODE    087DH     0035H     UNIT         ?PR?_DISPLAY?SENSOR
+            CODE    08B2H     0030H     UNIT         ?PR?MAIN?SENSOR
+            CODE    08E2H     002DH     UNIT         ?C?LIB_CODE
+            CODE    090FH     0028H     UNIT         ?PR?_DELAY?SENSOR
+            CODE    0937H     0019H     UNIT         ?PR?INIT?SENSOR
+            CODE    0950H     0012H     UNIT         ?PR?_WRITE?SENSOR
+            CODE    0962H     0010H     UNIT         ?PR?_CMD?SENSOR
+            CODE    0972H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\sensor (?C_STARTUP)
+
+
+SEGMENT                               DATA_GROUP 
+  +--> CALLED SEGMENT               START    LENGTH
+---------------------------------------------------
+?C_C51STARTUP                       -----    -----
+  +--> ?PR?MAIN?SENSOR
+
+?PR?MAIN?SENSOR                     0015H    0002H
+  +--> ?PR?INIT?SENSOR
+  +--> ?PR?_DELAY?SENSOR
+  +--> ?PR?_CONVERT_DISPLAY?SENSOR
+
+?PR?INIT?SENSOR                     -----    -----
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/22/2023  13:19:58  PAGE 2
+
+
+  +--> ?PR?_CMD?SENSOR
+
+?PR?_CMD?SENSOR                     -----    -----
+  +--> ?PR?_DELAY?SENSOR
+
+?PR?_CONVERT_DISPLAY?SENSOR         0017H    0003H
+  +--> ?PR?_CMD?SENSOR
+  +--> ?PR?_WRITE?SENSOR
+
+?PR?_WRITE?SENSOR                   -----    -----
+  +--> ?PR?_DELAY?SENSOR
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\sensor (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:0972H         SEGMENT       ?C_C51STARTUP
+  I:001AH         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0975H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0972H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0972H         LINE#         133
+  C:0974H         LINE#         134
+  C:0975H         LINE#         135
+  C:0976H         LINE#         136
+  C:0978H         LINE#         185
+  C:097BH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        SENSOR
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/22/2023  13:19:58  PAGE 3
+
+
+  D:00B0H         PUBLIC        P3
+  C:0917H         PUBLIC        _delay
+  C:08B2H         PUBLIC        main
+  C:0800H         PUBLIC        _rev_display
+  C:0958H         PUBLIC        _write
+  C:0962H         PUBLIC        _cmd
+  C:0937H         PUBLIC        init
+  B:00A0H.7       PUBLIC        intr
+  B:00A0H.2       PUBLIC        en
+  B:00A0H.6       PUBLIC        rd
+  C:0844H         PUBLIC        _convert_display
+  B:00A0H.0       PUBLIC        rs
+  B:00A0H.5       PUBLIC        wr
+  B:00A0H.1       PUBLIC        rw
+  C:087DH         PUBLIC        _display
+  -------         PROC          INIT
+  C:0937H         LINE#         15
+  C:0937H         LINE#         16
+  C:093CH         LINE#         17
+  C:0941H         LINE#         18
+  C:0946H         LINE#         19
+  C:094BH         LINE#         20
+  -------         ENDPROC       INIT
+  -------         PROC          _CMD
+  D:0007H         SYMBOL        d
+  C:0962H         LINE#         23
+  C:0962H         LINE#         24
+  C:0964H         LINE#         25
+  C:0966H         LINE#         26
+  C:0966H         LINE#         28
+  C:0966H         LINE#         29
+  C:0969H         LINE#         30
+  C:096BH         LINE#         31
+  -------         ENDPROC       _CMD
+  -------         PROC          L?0031
+  -------         ENDPROC       L?0031
+  -------         PROC          _WRITE
+  D:0006H         SYMBOL        d
+  C:0958H         LINE#         34
+  C:0958H         LINE#         35
+  C:095AH         LINE#         36
+  C:095CH         LINE#         37
+  C:095CH         LINE#         39
+  C:095CH         LINE#         40
+  C:095FH         LINE#         41
+  C:0961H         LINE#         42
+  -------         ENDPROC       _WRITE
+  -------         PROC          _DISPLAY
+  D:000FH         SYMBOL        s
+  D:0012H         SYMBOL        len
+  -------         DO            
+  D:0013H         SYMBOL        i
+  -------         ENDDO         
+  C:087DH         LINE#         44
+  C:0885H         LINE#         46
+  C:0895H         LINE#         47
+  C:08A4H         LINE#         48
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/22/2023  13:19:58  PAGE 4
+
+
+  C:08A7H         LINE#         49
+  C:08B1H         LINE#         50
+  -------         ENDPROC       _DISPLAY
+  -------         PROC          _REV_DISPLAY
+  D:0008H         SYMBOL        s
+  D:000BH         SYMBOL        len
+  -------         DO            
+  D:000DH         SYMBOL        i
+  -------         ENDDO         
+  C:0800H         LINE#         52
+  C:080AH         LINE#         54
+  C:080FH         LINE#         55
+  C:0814H         LINE#         56
+  C:0827H         LINE#         57
+  C:0836H         LINE#         58
+  C:0839H         LINE#         59
+  C:0843H         LINE#         60
+  -------         ENDPROC       _REV_DISPLAY
+  C:0913H         SYMBOL        L?0030
+  -------         PROC          L?0029
+  -------         ENDPROC       L?0029
+  C:0913H         SYMBOL        L?0030
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        d
+  -------         DO            
+  D:0004H         SYMBOL        a
+  D:0002H         SYMBOL        b
+  -------         ENDDO         
+  C:0917H         LINE#         62
+  C:0917H         LINE#         65
+  C:0921H         LINE#         66
+  C:0936H         LINE#         67
+  -------         ENDPROC       _DELAY
+  -------         PROC          _CONVERT_DISPLAY
+  D:0017H         SYMBOL        val
+  -------         DO            
+  D:0007H         SYMBOL        x1
+  D:0018H         SYMBOL        x2
+  D:0019H         SYMBOL        x3
+  -------         ENDDO         
+  C:0844H         LINE#         9
+  C:0846H         LINE#         10
+  C:0846H         LINE#         12
+  C:084BH         LINE#         13
+  C:0854H         LINE#         14
+  C:0860H         LINE#         15
+  C:0863H         LINE#         16
+  C:0868H         LINE#         17
+  C:086FH         LINE#         18
+  C:0876H         LINE#         19
+  -------         ENDPROC       _CONVERT_DISPLAY
+  -------         PROC          MAIN
+  -------         DO            
+  D:0015H         SYMBOL        val
+  D:0016H         SYMBOL        i
+  -------         ENDDO         
+  C:08B2H         LINE#         22
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  02/22/2023  13:19:58  PAGE 5
+
+
+  C:08B2H         LINE#         23
+  C:08B5H         LINE#         24
+  C:08B8H         LINE#         26
+  C:08BAH         LINE#         28
+  C:08BAH         LINE#         29
+  C:08BCH         LINE#         30
+  C:08C3H         LINE#         31
+  C:08C5H         LINE#         32
+  C:08CAH         LINE#         33
+  C:08CCH         LINE#         35
+  C:08CFH         LINE#         36
+  C:08D1H         LINE#         37
+  C:08D4H         LINE#         38
+  C:08D9H         LINE#         40
+  C:08E0H         LINE#         41
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        SENSOR
+
+  -------         MODULE        ?C?CLDOPTR
+  C:08E2H         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DISPLAY?SENSOR
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_REV_DISPLAY?SENSOR
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0154H BYTE (16%) *
+******************************************************************************
+
+Program Size: data=27.0 xdata=0 code=385
+LINK/LOCATE RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)
