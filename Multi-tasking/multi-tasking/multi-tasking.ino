@@ -6,6 +6,8 @@ void setup() {
   xTaskCreate(task1,"Task1",100,NULL,1,NULL);
   xTaskCreate(task2,"Task2",100,NULL,1,NULL);
 
+//  xTaskCreate(task,"Task1",100,1,1,NULL);//pass a number to the task
+//  xTaskCreate(task,"Task2",100,2,1,NULL);
   //vTaskStartScheduler();
 }
 
