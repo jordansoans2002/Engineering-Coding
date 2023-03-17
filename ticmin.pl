@@ -64,5 +64,3 @@ best_move([Move1|Moves], Player, Depth, BestScore, BestMove) :-
 % Define the next_player function.
 next_player(x, o).
 next_player(o, x).
-
-% Define the
