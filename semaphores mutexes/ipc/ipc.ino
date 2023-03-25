@@ -85,9 +85,6 @@ void task3(void *param){
   vTaskDelay(1000/portTICK_PERIOD_MS);
 
   for(i=0;;i++){
-    // xSemaphoreTake(disp,portMAX_DELAY);
-    Serial.println("T3");
-    // xSemaphoreGive(disp);
     if(i==2){
       // xSemaphoreTake(disp,portMAX_DELAY);
       Serial.println(F("sg"));
@@ -106,6 +103,9 @@ void task3(void *param){
       vTaskDelete(taskHandle2);
       vTaskDelete(NULL);
     }
+    // xSemaphoreTake(disp,portMAX_DELAY);
+    Serial.println("T3");
+    // xSemaphoreGive(disp);
     vTaskDelay(3000/portTICK_PERIOD_MS);
   }
 }
