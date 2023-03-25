@@ -1,7 +1,13 @@
+// LCD1602 to Arduino Uno connection example
+
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(12, 11, 10, 9, 8, 7);
+
 #include <Arduino_FreeRTOS.h>
 #define  configUSE_PREEMPTION 1
 #define configUSE_TIME_SLICING 1
 #define configUSE_MUTEXES 1
+#define uxTaskPriorityGet 1
 #include "semphr.h"
 #include "task.h"
 
@@ -19,18 +25,17 @@ SemaphoreHandle_t xMutex=NULL;
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  lcd.begin(20, 4);
 
   vSemaphoreCreateBinary(disp);
   xMutex=xSemaphoreCreateMutex();
   vSemaphoreCreateBinary(binarySem);
   xSemaphoreTake(binarySem,0);
-  xSemaphoreTake(xMutex,0);
-
-  if(xMutex!=NULL){
-      xTaskCreate(task3,"Task 3",100,NULL,1,&taskHandle3);
-      xTaskCreate(task2,"Task 2",100,NULL,2,&taskHandle2);
-  }
+ 
+  xTaskCreate(task3,"Task 3",100,NULL,1,&taskHandle3);
+  xTaskCreate(task2,"Task 2",100,NULL,2,&taskHandle2);
   xTaskCreate(task1,"Task 1",100,NULL,3,&taskHandle1);
+  vTaskSuspend(taskHandle1);
   vTaskStartScheduler();
 
 }
@@ -42,57 +47,58 @@ void loop() {
 
 void task1(void *param){
   (void) param;
-  xSemaphoreTake(disp,2);
-  Serial.println("T1e");
-  xSemaphoreGive(disp);
-  vTaskDelay(10000/portTICK_PERIOD_MS);
+  // xSemaphoreTake(disp,portMAX_DELAY);
+  Serial.println(F("T1e"));
+  // xSemaphoreGive(disp);
+  xSemaphoreTake(xMutex,portMAX_DELAY);
   while(1){
-    xSemaphoreTake(xMutex,0);
-    xSemaphoreTake(disp,2);
+    // xSemaphoreTake(disp,portMAX_DELAY);
     Serial.println(F("T1"));
-    xSemaphoreGive(disp);
-    vTaskDelay(10000/portTICK_PERIOD_MS);
+    // xSemaphoreGive(disp);
+    vTaskDelay(3000/portTICK_PERIOD_MS);
   }
 }
 void task2(void *param){
   (void) param;
-  xSemaphoreTake(binarySem,0);
-  xSemaphoreTake(disp,2);
+  // xSemaphoreTake(disp,portMAX_DELAY);
   Serial.println(F("T2s"));
-  xSemaphoreGive(disp);
-  vTaskDelay(10000/portTICK_PERIOD_MS);
+  // xSemaphoreGive(disp);
+  vTaskDelay(1000/portTICK_PERIOD_MS);
+  xSemaphoreTake(binarySem,portMAX_DELAY);
  
-  int i;
-  for(i=0;;i++){
-    xSemaphoreTake(disp,0);
+  while(1){
+    // xSemaphoreTake(disp,portMAX_DELAY);
     Serial.println(F("T2"));
-    xSemaphoreGive(disp);
-    vTaskDelay(30000/portTICK_PERIOD_MS);
+    // xSemaphoreGive(disp);
+    vTaskDelay(3000/portTICK_PERIOD_MS);
   }
 }
 void task3(void *param){
   (void) param;
   int i;
-  xSemaphoreTake(disp,0);
-  Serial.println("T3e");
-  xSemaphoreGive(disp);
-  vTaskDelay(10000/portTICK_PERIOD_MS);
+  xSemaphoreTake(xMutex,portMAX_DELAY);
+  vTaskResume(taskHandle1);
+  // xSemaphoreTake(disp,portMAX_DELAY);
+  Serial.println("3mt");
+  // xSemaphoreGive(disp);
+  vTaskDelay(1000/portTICK_PERIOD_MS);
+
   for(i=0;;i++){
-//    xSemaphoreTake(disp,0);
-//    Serial.println(F("T3"));
-//    xSemaphoreGive(disp);
-    if(i==500){
-      xSemaphoreTake(disp,0);
+    // xSemaphoreTake(disp,portMAX_DELAY);
+    Serial.println("T3");
+    // xSemaphoreGive(disp);
+    if(i==2){
+      // xSemaphoreTake(disp,portMAX_DELAY);
       Serial.println(F("sg"));
-      xSemaphoreGive(disp);
+      // xSemaphoreGive(disp);
       xSemaphoreGive(binarySem);
     }
-    if(i==1000){
-      xSemaphoreTake(disp,2);
+    if(i==5){
+      // xSemaphoreTake(disp,portMAX_DELAY);
       Serial.println(F("mg"));
-      xSemaphoreGive(disp);
+      // xSemaphoreGive(disp);
       xSemaphoreGive(xMutex);
     }
-    vTaskDelay(30000/portTICK_PERIOD_MS);
+    vTaskDelay(3000/portTICK_PERIOD_MS);
   }
 }
