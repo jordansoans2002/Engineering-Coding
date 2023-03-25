@@ -100,6 +100,12 @@ void task3(void *param){
       // xSemaphoreGive(disp);
       xSemaphoreGive(xMutex);
     }
+    if(i==10){
+      Serial.println("bas hoagaya na");
+      vTaskDelete(taskHandle1);
+      vTaskDelete(taskHandle2);
+      vTaskDelete(NULL);
+    }
     vTaskDelay(3000/portTICK_PERIOD_MS);
   }
 }
