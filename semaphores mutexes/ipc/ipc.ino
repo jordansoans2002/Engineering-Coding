@@ -29,6 +29,7 @@ void setup() {
 
   vSemaphoreCreateBinary(disp);
   xMutex=xSemaphoreCreateMutex();
+  //vSemaphoreCreateBinary(xMutex);
   vSemaphoreCreateBinary(binarySem);
   xSemaphoreTake(binarySem,0);
  
