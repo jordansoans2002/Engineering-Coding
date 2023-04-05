@@ -41,26 +41,26 @@ void loop() {
 
 void task1(void *param){
   (void) param;
-  Serial.println(F("T1e"));
-  
+  Serial.print(F("T1e "));
+  vTaskDelay(10000/portTICK_PERIOD_MS);
   //waiting for mutex held by task 3
   xSemaphoreTake(xMutex,portMAX_DELAY);
   while(1){
-    Serial.println(F("T1"));
-    vTaskDelay(3000/portTICK_PERIOD_MS);
+    Serial.print(F("T1 "));
+    vTaskDelay(500000/portTICK_PERIOD_MS);
   }
 }
 void task2(void *param){
   (void) param;
   Serial.println(F("T2e"));
-  vTaskDelay(1000/portTICK_PERIOD_MS);
+  vTaskDelay(10000/portTICK_PERIOD_MS);
 
   //waiting for task 3 to release semaphore
   xSemaphoreTake(binarySem,portMAX_DELAY);
  
   while(1){
-    Serial.println(F("T2"));
-    vTaskDelay(3000/portTICK_PERIOD_MS);
+    Serial.print(F("T2 "));
+    vTaskDelay(500000/portTICK_PERIOD_MS);
   }
 }
 void task3(void *param){
@@ -69,32 +69,32 @@ void task3(void *param){
   //take mutex so task 1 cant run
   xSemaphoreTake(xMutex,portMAX_DELAY);
   Serial.println("3mt");
-  vTaskDelay(1000/portTICK_PERIOD_MS);
+  vTaskDelay(10000/portTICK_PERIOD_MS);
 
   for(i=1;;i++){
-    if(i==2){
+    if(i==3){
       Serial.println(F("sg"));
       //give semaphore to task 2
       xSemaphoreGive(binarySem);
       //task 2 starts running
     }
-    if(i==4){
+    if(i==5){
       Serial.println(F("tr"));
       //resume suspended task 1
       vTaskResume(taskHandle1);
     }
-    if(i==7){
+    if(i==8){
       Serial.println(F("mg"));
       //give mutex to task 1
       xSemaphoreGive(xMutex);
     }
-    Serial.print("T3");
+    Serial.print(F("T3 "));
     if(i==10){
       Serial.println("bas hoagaya na");
       vTaskDelete(taskHandle1);
       vTaskDelete(taskHandle2);
       vTaskDelete(NULL);
     }
-    vTaskDelay(3000/portTICK_PERIOD_MS);
+    vTaskDelay(500000/portTICK_PERIOD_MS);
   }
 }
