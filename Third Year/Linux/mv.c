@@ -18,7 +18,7 @@ int main(int argc,char **argv){
 		fprintf(stderr,"cannot open source\n");
 		return -1;
 	}
-	file[1]=open(argv[2],O_CREAT,0777);
+	file[1]=open(argv[2], O_WRONLY | O_CREAT | S_IRUSR | S_IWUSR,0777);
 	if(file[1] == -1){
 		close(file[0]);
 		fprintf(stderr,"cannot open destination\n");
